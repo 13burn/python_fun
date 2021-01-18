@@ -4,35 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/eel.js"></script>
+    <link rel="stylesheet" href="main-style.css">
     <title>Document</title>
 </head>
 <body>
     <div class="main-controls">
-        <button onclick="eel.setNums(0, 100, 0)">start over</button>
+        <button id="set" onclick="eel.setNums(0, 100, 1)">Start the game</button>
         <p>Think of a number between 0 and 100</p>
+        
         <!-- <button>Start</button> -->
     </div>
     <div class="number" >
         <p id="num"></p>
     </div>
     <div class="guess-controls" >
-        <button onclick="eel.isLower()">My number is lower</button>
-        <button onclick="eel.correctNumber()">This is my number!</button>
-        <button onclick="eel.isHigher()">My number is higher</button>
+        <button class="guess" id="lower" onclick="eel.isLower()">My number is lower</button>
+        <button class="guess" id="correct" onclick="eel.correctNumber()">This is my number!</button>
+        <button class="guess" id="higher" onclick="eel.isHigher()">My number is higher</button>
+    </div>
+    <div>
         <p id="tries"></p>
     </div>
     <script>
         //all functions go here
         eel.expose(guessPrint)
         function guessPrint(guess){
-            $("#num").text("your number is " + guess)
+            $("#num").text("Your number is " + guess )
             //console.log("guess")
             //console.log(guess)
         }
 
         eel.expose(correctNum)
         function correctNum(num){
-            $("#tries").replaceWith(`<p id="tries">it took me  ${num} tries</p>`)
+            $("#tries").replaceWith(`<p id="tries">It took me  ${num} tries</p>`)
             //console.log("correct")
             //console.log(num)
         }
