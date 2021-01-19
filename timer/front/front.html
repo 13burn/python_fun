@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/eel.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="selector">
+        <p>Select the minutes:</p>
+        <input type="number" id="minutes" class="time" name="quantity" min="1" max="5" value=0><label for=""></label>
+        <p>Select the seconds:</p>
+        <input type="number" id="seconds" class="time" name="quantity" min="1" max="60" value=0>
+        <button id= "start" onclick="startCountdown()">Start countdown</button>
+    </div>
+    <div id="counter">
+        <p id="time-count"></p>
+    </div>
+    <script>
+        //functions to update info
+        function startCountdown(){
+            var minutes = document.getElementById('minutes').value
+            var seconds = document.getElementById('seconds').value
+            eel.converter(minutes, seconds)
+            console.log("sent to python")
+        }
+
+        function printSeconds(time){
+            console.log(time)
+            if (time > 1){
+                $("#time-count").text(time + " Seconds left")
+            }else{
+                $("#time-count").text("Time's up")
+            }
+            
+        }
+
+        eel.expose(countDown)
+        function countDown(seconds){
+            console.log("start countdown")
+            setInterval(function(){ 
+                printSeconds(seconds);
+                seconds = seconds - 1
+            }, 1000);
+            
+        }
+
+    </script>
+    <script src="http://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+</body>
+</html>
