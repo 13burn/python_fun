@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- TODO: give style to this mess -->
     <div id="selector">
         <p>Select the minutes:</p>
         <input type="number" id="minutes" class="time" name="quantity" min="1" max="5" value=0><label for=""></label>
@@ -17,9 +18,10 @@
     <div id="counter">
         <p id="time-count"></p>
     </div>
+    <!-- TODO: change all this to it's own JS file -->
     <script>
         //functions to update info
-        function startCountdown(){
+        function startCountdown(){ //this one is just a parser function, it takes minutes defined and sends it to a converter function(tht i might/will change to js)
             var minutes = document.getElementById('minutes').value
             var seconds = document.getElementById('seconds').value
             eel.converter(minutes, seconds)
@@ -27,26 +29,29 @@
         }
 
         function printSeconds(time){
-            console.log(time)
-            if (time > 1){
+            //print whatever time's left
+            if (time > 0){
                 $("#time-count").text(time + " Seconds left")
             }else{
                 $("#time-count").text("Time's up")
+                location.reload()
+
             }
             
         }
 
         eel.expose(countDown)
         function countDown(seconds){
-            console.log("start countdown")
+            printSeconds(seconds)//printing the initial time, it'll probably change immediatly anyway
             setInterval(function(){ 
-                printSeconds(seconds);
-                seconds = seconds - 1
+                printSeconds(seconds-1);
+                seconds = seconds - 1 //changing the time left
             }, 1000);
             
         }
 
     </script>
+    <!-- Don't judge me, i like jQuery -->
     <script src="http://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
 </body>
 </html>
